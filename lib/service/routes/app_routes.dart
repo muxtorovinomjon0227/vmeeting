@@ -1,9 +1,13 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vmeeting/blocs/user_sign_up_bloc/user_sign_up_bloc.dart';
 import 'package:vmeeting/service/routes/routes_name.dart';
-import 'package:vmeeting/views/signin_view/signin_page.dart';
+import 'package:vmeeting/views/main_view/main_page.dart';
 import '../../src/controllers/enter_number_cont.dart';
+import '../../views/signin_view/signin_page.dart';
+import '../../views/signup_view/signup_page.dart';
 import '../../views/splash_view/splash_screen.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -32,19 +36,22 @@ class MainNavigator extends StatelessWidget {
             case MainRoutes.splash_screen:
               builder = (BuildContext _) => SplashScreen(controller: controller);
               break;
-              case MainRoutes.user_signin_page:
+              case MainRoutes.main_page:
+              builder = (BuildContext _) => MainPage(controller: controller);
+              break;
+              case MainRoutes.sign_in_page:
               builder = (BuildContext _) => UserSignInPage(controller: controller);
               break;
-            // case MainRoutes.splash_screen:
-            //   builder = (BuildContext _) => MultiBlocProvider(
-            //     providers: [
-            //       BlocProvider<CallPageBloc>(
-            //         create: (context) => CallPageBloc(),
-            //       ),
-            //     ],
-            //     child: MyMainPage(controller: _controller,),
-            //   );
-            //   break;
+            case MainRoutes.user_signup_page:
+              builder = (BuildContext _) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<UserSignUpBloc>(
+                    create: (context) => UserSignUpBloc(),
+                  ),
+                ],
+                child: UserSignUpPage(controller: controller),
+              );
+              break;
           }
           if (builder != null) {
             return MaterialPageRoute(builder: builder, settings: settings);
