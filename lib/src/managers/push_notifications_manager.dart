@@ -1,17 +1,12 @@
 import 'dart:convert';
-
 import 'package:connectycube_flutter_call_kit/connectycube_flutter_call_kit.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
 import 'package:universal_io/io.dart';
-
 import 'package:connectycube_sdk/connectycube_sdk.dart';
-
-import '../../../main.dart';
+import '../../main.dart';
 import '../utils/consts.dart';
 import '../utils/pref_util.dart';
 
@@ -135,6 +130,7 @@ Future<void> onCallRejectedWhenTerminated(CallEvent callEvent) async {
 
   var currentUser = await SharedPrefs.getUser();
   initConnectycubeContextLess();
+
 
   var sendOfflineReject = rejectCall(callEvent.sessionId, {
     ...callEvent.opponentsIds.where((userId) => currentUser!.id != userId),

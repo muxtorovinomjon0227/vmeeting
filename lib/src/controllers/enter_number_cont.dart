@@ -1,8 +1,8 @@
 import 'dart:async';
 
 class NumberController {
-  final StreamController<int> controller = StreamController<int>.broadcast();
-  Sink<int> get inputNumber => controller.sink;
-  Stream<int> get outputNumber => controller.stream;
+  final StreamController<bool> themeController = StreamController<bool>.broadcast();
+  Sink<bool> get inputTheme => themeController.sink;
+  Stream<bool> get outputTheme => themeController.stream;
 
 }

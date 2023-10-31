@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../service/routes/routes_name.dart';
 import '../../src/controllers/enter_number_cont.dart';
 import '../../src/widgets/big_text_widget.dart';
 class SplashScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
       ..forward()
       ..addStatusListener((status) async {
         if (status == AnimationStatus.completed)   {
-          // Navigator.of(context).pushReplacementNamed(MainRoutes.sign_in_page);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.user_signin_page);
         }
       });
     _curvedAnimation =
@@ -52,7 +53,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
                   width: 250,
                   height: 250,
                   child:
-                  Image.asset('assets/videomeet.png', fit: BoxFit.fill),
+                  Image.asset('assets/mymeetinglogo.png', fit: BoxFit.fill),
                 ),
               ),
             ),
