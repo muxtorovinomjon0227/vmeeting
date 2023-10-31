@@ -2,15 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:vmeeting/service/routes/routes_name.dart';
+import 'package:vmeeting/views/signin_view/signin_page.dart';
 import '../../src/controllers/enter_number_cont.dart';
 import '../../views/splash_view/splash_screen.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-final NumberController _controller = NumberController();
 
 
 class MainNavigator extends StatelessWidget {
-  const MainNavigator({Key? key}) : super(key: key);
+  final NumberController controller;
+  const MainNavigator({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,10 @@ class MainNavigator extends StatelessWidget {
           WidgetBuilder? builder;
           switch (settings.name) {
             case MainRoutes.splash_screen:
-              builder = (BuildContext _) => SplashScreen(controller: _controller,);
+              builder = (BuildContext _) => SplashScreen(controller: controller);
+              break;
+              case MainRoutes.user_signin_page:
+              builder = (BuildContext _) => UserSignInPage(controller: controller);
               break;
             // case MainRoutes.splash_screen:
             //   builder = (BuildContext _) => MultiBlocProvider(

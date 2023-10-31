@@ -8,12 +8,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:vmeeting/service/routes/app_routes.dart';
 import 'package:vmeeting/service/routes/navigator_service.dart';
+import 'package:vmeeting/src/constants/app_themes/app_themes.dart';
+import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/src/utils/pref_util.dart';
 import 'firebase_options.dart';
 import 'src/utils/configs.dart' as config;
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
@@ -33,31 +35,35 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final NumberController controller = NumberController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: GoogleFonts.latoTextTheme(),
-        ),
-        title: 'Theme App',
-        navigatorKey: App.navigationService.navigatorKey,
-        home: UpgradeAlert(
-          upgrader: Upgrader(
-              canDismissDialog: true,
-              shouldPopScope: () => true,
-              cupertinoButtonTextStyle: GoogleFonts.lato(
-                  textStyle: Theme.of(context).textTheme.bodyMedium,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal),
-              durationUntilAlertAgain: const Duration(days: 1),
-              dialogStyle: Platform.isIOS ?  UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material
-          ),
-          child: const MainNavigator(),
-        )
-    );
+    return StreamBuilder(
+        stream: controller.outputTheme,
+        initialData: false,
+        builder: (BuildContext context, snapshot){
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: getAppTheme(context, snapshot.data ?? false),
+              title: 'Theme App',
+              navigatorKey: App.navigationService.navigatorKey,
+              home: UpgradeAlert(
+                upgrader: Upgrader(
+                    canDismissDialog: true,
+                    shouldPopScope: () => true,
+                    cupertinoButtonTextStyle: GoogleFonts.lato(
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal),
+                    durationUntilAlertAgain: const Duration(days: 1),
+                    dialogStyle: Platform.isIOS ?  UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material
+                ),
+                child:  MainNavigator(controller: controller),
+              )
+          );
+        });
   }
 
   @override
