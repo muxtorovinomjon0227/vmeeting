@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'package:connectycube_flutter_call_kit/connectycube_flutter_call_kit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:connectycube_sdk/connectycube_sdk.dart';
 import 'package:flutter/services.dart';
-import 'package:vmeeting/src/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:upgrader/upgrader.dart';
+import 'package:vmeeting/service/routes/app_routes.dart';
+import 'package:vmeeting/service/routes/navigator_service.dart';
 import 'package:vmeeting/src/utils/pref_util.dart';
 import 'firebase_options.dart';
 import 'src/utils/configs.dart' as config;
@@ -19,6 +23,7 @@ void main() async {
 }
 
 class App extends StatefulWidget {
+  static NavigationService navigationService = NavigationService();
   const App({super.key});
 
   @override
@@ -28,17 +33,30 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: Builder(
-        builder: (context) {
-          return LoginScreen();
-        },
-      ),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(),
+        ),
+        title: 'Theme App',
+        navigatorKey: App.navigationService.navigatorKey,
+        home: UpgradeAlert(
+          upgrader: Upgrader(
+              canDismissDialog: true,
+              shouldPopScope: () => true,
+              cupertinoButtonTextStyle: GoogleFonts.lato(
+                  textStyle: Theme.of(context).textTheme.bodyMedium,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.normal),
+              durationUntilAlertAgain: const Duration(days: 1),
+              dialogStyle: Platform.isIOS ?  UpgradeDialogStyle.cupertino : UpgradeDialogStyle.material
+          ),
+          child: const MainNavigator(),
+        )
     );
   }
 
