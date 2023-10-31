@@ -16,10 +16,6 @@ import 'src/utils/configs.dart' as config;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
-  ));
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(App());
 }

@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
       ..forward()
       ..addStatusListener((status) async {
         if (status == AnimationStatus.completed)   {
-          Navigator.of(context).pushReplacementNamed(MainRoutes.user_signin_page);
+          Navigator.of(context).pushReplacementNamed(MainRoutes.sign_in_page);
         }
       });
     _curvedAnimation =
