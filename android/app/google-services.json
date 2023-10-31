@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "130671191292",
+    "project_id": "connectycubevideocall",
+    "storage_bucket": "connectycubevideocall.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130671191292:android:52bb65faf37241024ba379",
+        "android_client_info": {
+          "package_name": "uz.technounitgroup.vmeeting"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD59k2Vh3nVTxnuRLMZW-AUHPmjN9Yr1uA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
