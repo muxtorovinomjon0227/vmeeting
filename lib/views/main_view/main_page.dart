@@ -1,10 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vmeeting/blocs/home_page_bloc/home_page_bloc.dart';
 import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/views/home_view/home_page.dart';
 import 'package:vmeeting/views/profile_view/profile_page.dart';
 import 'package:vmeeting/views/users_view/users_page.dart';
-
 import '../../src/constants/colors_const.dart';
 
 class MainPage extends StatefulWidget {
@@ -18,7 +19,14 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int current_index = 0;
   late List<Widget> pages = [
-    HomePage(controller: widget.controller),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<HomePageBloc>(
+          create: (context) => HomePageBloc(),
+        ),
+      ],
+      child: HomePage(controller: widget.controller),
+    ),
     AllUsersViewPage(controller: widget.controller),
     ProfilePage(controller: widget.controller)
   ];
@@ -39,7 +47,7 @@ class _MainPageState extends State<MainPage> {
           borderRadius: BorderRadius.circular(50),
           child: CurvedNavigationBar(
             height: 50,
-            backgroundColor: ColorConst.appGreanColor,
+            backgroundColor: ColorConst.appBackgroundColor,
             color: ColorConst.appGreenColor,
             buttonBackgroundColor: ColorConst.appGreenColor,
             onTap: OnTapped,

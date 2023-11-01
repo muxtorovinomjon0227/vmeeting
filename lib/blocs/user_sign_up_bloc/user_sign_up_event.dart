@@ -7,3 +7,11 @@ class UserSignUpFetchEvent extends UserSignUpEvent{
   @override
   List<Object?> get props => [];
 }
+class UserSignUpChakingEvent extends UserSignUpEvent {
+  final BuildContext context;
+  final CubeUser user;
+  final NumberController controller;
+  UserSignUpChakingEvent({required this.controller, required this.context, required this.user});
+  @override
+  List<Object?> get props => [context,user, controller];
+}
