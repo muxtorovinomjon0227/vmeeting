@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmeeting/src/constants/colors_const.dart';
 
+import '../../app_models/user_model/user_model.dart';
+
 class AppUtils {
   static  Widget buttonLoader = SizedBox(
     width: 30,
@@ -32,5 +34,6 @@ class AppUtils {
     );
     ScaffoldMessenger.of(context).showSnackBar(snackdemo);
   }
+  static UserModel userModel = UserModel();
 }
 

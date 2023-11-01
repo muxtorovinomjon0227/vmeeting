@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vmeeting/blocs/user_sign_up_bloc/user_sign_up_bloc.dart';
 import 'package:vmeeting/service/routes/routes_name.dart';
 import 'package:vmeeting/views/main_view/main_page.dart';
+import '../../blocs/user_login_bloc/user_log_in_bloc.dart';
 import '../../src/controllers/enter_number_cont.dart';
 import '../../views/signin_view/signin_page.dart';
 import '../../views/signup_view/signup_page.dart';
@@ -39,9 +40,6 @@ class MainNavigator extends StatelessWidget {
               case MainRoutes.main_page:
               builder = (BuildContext _) => MainPage(controller: controller);
               break;
-              case MainRoutes.sign_in_page:
-              builder = (BuildContext _) => UserSignInPage(controller: controller);
-              break;
             case MainRoutes.user_signup_page:
               builder = (BuildContext _) => MultiBlocProvider(
                 providers: [
@@ -50,6 +48,16 @@ class MainNavigator extends StatelessWidget {
                   ),
                 ],
                 child: UserSignUpPage(controller: controller),
+              );
+              break;
+              case MainRoutes.sign_in_page:
+              builder = (BuildContext _) => MultiBlocProvider(
+                providers: [
+                  BlocProvider<UserLogInBloc>(
+                    create: (context) => UserLogInBloc(),
+                  ),
+                ],
+                child: UserSignInPage(controller: controller),
               );
               break;
           }

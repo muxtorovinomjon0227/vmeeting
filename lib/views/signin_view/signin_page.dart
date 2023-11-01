@@ -1,15 +1,17 @@
 import 'package:connectycube_sdk/connectycube_calls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vmeeting/blocs/user_login_bloc/user_log_in_bloc.dart';
 import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/src/extension/context_extensions.dart';
-
-import '../../app_models/user_model/user_model.dart';
 import '../../service/routes/routes_name.dart';
 import '../../src/constants/colors_const.dart';
 import '../../src/utils/app_utils.dart';
-import '../../src/utils/show_dialogs.dart';
+import '../../src/utils/pref_util.dart';
 import '../../src/widgets/big_text_widget.dart';
 import '../../src/widgets/custom_loading/customloading.dart';
+import '../../src/widgets/exceptions/app_exeptions.dart';
+import '../../src/widgets/small_text.dart';
 import '../../src/widgets/textfiled_widgets/auth_text_fild.dart';
 
 class UserSignInPage extends StatefulWidget {
@@ -21,16 +23,46 @@ class UserSignInPage extends StatefulWidget {
 }
 
 class _UserSignInPageState extends State<UserSignInPage> {
+  late UserLogInBloc userLogInBloc;
   late bool isDarkMode = false;
-  final _loginControlle = TextEditingController(text: "");
+  final _loginControlle = TextEditingController(text: "Inomjon2000");
   final _loginFocusNode = FocusNode();
-  final _passwordControlle = TextEditingController(text: "");
+  final _passwordControlle = TextEditingController(text: "Inomjon5408");
   final _passwordFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    userLogInBloc = BlocProvider.of<UserLogInBloc>(context);
+    SharedPrefs.getUser().then((loggedUser) {
+      if (loggedUser != null) {
+        userLogInBloc.add(UserLogInChakedEvent(controller: widget.controller, context: context, user: loggedUser));
+      } else{
+        userLogInBloc.add(UserLogInFetchEvent());
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body:  buildUI(),
+      body: BlocConsumer<UserLogInBloc, UserLogInState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is UserLogInInitialState) {
+            return buildLoading();
+          } else if (state is UserLogInLoadedState) {
+            return buildUI();
+          }
+          if (state is UserLogInExceptionState) {
+            return const Center(
+                child: AppExceptionsWidget(
+                    message: "Exception",
+                    authName: MainRoutes.user_signup_page));
+          }
+          return const Center(child: Text("AloVoice"));
+        },
+      ),
     );
   }
   Widget buildUI(){
@@ -76,7 +108,15 @@ class _UserSignInPageState extends State<UserSignInPage> {
                 focusNode: _passwordFocusNode,
                 textEditingController: _passwordControlle,
               ),
-              SizedBox(height: context.h * 0.16),
+              SizedBox(height: context.h * 0.02),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(onPressed: (){
+                    Navigator.pushReplacementNamed(context, MainRoutes.user_signup_page);
+                  }, child: SmallText(text: "Sign Up",color: ColorConst.appMainColor,))
+                ],),
+              SizedBox(height: context.h * 0.13),
               buildButtons(),
             ],
           ),
@@ -111,8 +151,8 @@ class _UserSignInPageState extends State<UserSignInPage> {
                   child:  Center(
                     child: snapshot.data ?? false
                         ? AppUtils.buttonLoader
-                        : const BigText(
-                      text: "Sin Up",
+                        :  BigText(
+                      text: "Sign In".toUpperCase(),
                       fontWidget: FontWeight.bold,
                       size: 16,
                     ),
@@ -127,23 +167,8 @@ class _UserSignInPageState extends State<UserSignInPage> {
     CubeUser user = CubeUser(
       login: _loginControlle.text,
       password: _passwordControlle.text,);
-    signIn(user).then((cubeUser) {
-      UserModel(
-          id: cubeUser.id,
-          login: cubeUser.login,
-          email: cubeUser.email,
-          fullName: cubeUser.fullName
-      );
-      print("Shu yerda $cubeUser");
-      widget.controller.inputElevatedButton.add(false);
-      Navigator.pushReplacementNamed(context, MainRoutes.main_page);
+    userLogInBloc.add(UserLogInChakingEvent(controller: widget.controller, context: context, user: user));
 
-    })
-        .catchError((error){
-      widget.controller.inputElevatedButton.add(false);
-      errorMessage(context);
-      print(error);
-    });
   }
 
   Widget buildLoading() {

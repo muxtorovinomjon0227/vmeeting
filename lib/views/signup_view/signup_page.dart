@@ -5,6 +5,7 @@ import 'package:vmeeting/blocs/user_sign_up_bloc/user_sign_up_bloc.dart';
 import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/src/extension/context_extensions.dart';
 import 'package:vmeeting/src/utils/app_utils.dart';
+import 'package:vmeeting/src/widgets/small_text.dart';
 
 import '../../app_models/user_model/user_model.dart';
 import '../../service/routes/routes_name.dart';
@@ -136,8 +137,15 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
               focusNode: _fullNameFocusNode,
               textEditingController: _fullNameControlle,
             ),
-            SizedBox(height: context.h * 0.06),
-            SizedBox(height: context.h * 0.06),
+            SizedBox(height: context.h * 0.01),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+              TextButton(onPressed: (){
+                Navigator.pushReplacementNamed(context, MainRoutes.sign_in_page);
+              }, child: SmallText(text: "Sign In",color: ColorConst.appMainColor,))
+            ],),
+            SizedBox(height: context.h * 0.08),
             buildButtons(),
           ],
         ),
@@ -159,9 +167,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
               disabledBackgroundColor: Colors.grey.withOpacity(0.12),
             ),
             onPressed: () async {
-              Navigator.pushReplacementNamed(context, MainRoutes.main_page);
               if(_fullNameControlle.text.isNotEmpty && _emailControlle.text.isNotEmpty && _loginControlle.text.isNotEmpty && _passwordControlle.text.isNotEmpty){
-                widget.controller.inputElevatedButton.add(true);
                 userSigUp();
               }else{
               AppUtils.showSnackBar(context, "PLEASE ENTER THE SAME VALUE AGAIN");
@@ -174,8 +180,8 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
               child:  Center(
                 child: snapshot.data ?? false
                     ? AppUtils.buttonLoader
-                    : const BigText(
-                  text: "Sin Up",
+                    :  BigText(
+                  text: "Sign Up".toUpperCase(),
                   fontWidget: FontWeight.bold,
                   size: 16,
                 ),
@@ -188,26 +194,14 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
   }
 
   Future<void> userSigUp() async {
+    widget.controller.inputElevatedButton.add(true);
     CubeUser user = CubeUser(
         login: _loginControlle.text,
         password: _passwordControlle.text,
         email: _emailControlle.text,
         fullName: _fullNameControlle.text,);
-    signUp(user).then((cubeUser) {
-      UserModel(
-        id: cubeUser.id,
-        login: cubeUser.login,
-        email: cubeUser.email,
-        fullName: cubeUser.fullName
-      );
-          print("Shu yerda $cubeUser");
-          widget.controller.inputElevatedButton.add(false);
-    })
-        .catchError((error){
-      widget.controller.inputElevatedButton.add(false);
-      errorMessage(context);
-          print(error);
-    });
+    userSignUpBloc.add(UserSignUpChakingEvent(controller: widget.controller, context: context, user: user));
+
   }
 
   Widget buildLoading() {
