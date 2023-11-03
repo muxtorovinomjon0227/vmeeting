@@ -75,14 +75,14 @@ class _UserSignInPageState extends State<UserSignInPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Switch.adaptive(
-                    value:  isDarkMode,
-                    activeColor: ColorConst.appGreenColor,
-                    onChanged: (value) {
-                      isDarkMode = value;
-                      widget.controller.inputTheme.add(value);
-                    },
-                  ),
+                  // Switch.adaptive(
+                  //   value:  isDarkMode,
+                  //   activeColor: ColorConst.appGreenColor,
+                  //   onChanged: (value) {
+                  //     isDarkMode = value;
+                  //     widget.controller.inputTheme.add(value);
+                  //   },
+                  // ),
                 ],),
               SizedBox(height: context.h * 0.12),
               BigText(

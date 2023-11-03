@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             SmallText(text: appUsersModel.user?.fullName ?? "",fontWidget: FontWeight.bold,),
             SizedBox(height: context.h*0.005),
-            SmallText(text: appUsersModel.user?.email ?? "", size: context.h*0.02),
+            SmallText(text: appUsersModel.user?.email ?? "", size: context.h*0.015),
             SizedBox(height: context.h*0.005),
             SmallText(text: appUsersModel.user?.phone ?? ""),
           ],

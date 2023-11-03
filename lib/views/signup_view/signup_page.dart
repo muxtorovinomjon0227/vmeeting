@@ -25,13 +25,13 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
   late UserSignUpBloc userSignUpBloc;
   late bool isDarkMode = false;
 
-  final _loginControlle = TextEditingController(text: "Flutter2000");
+  final _loginControlle = TextEditingController(text: "");
   final _loginFocusNode = FocusNode();
-  final _passwordControlle = TextEditingController(text: "Flutter2000");
+  final _passwordControlle = TextEditingController(text: "");
   final _passwordFocusNode = FocusNode();
-  final _emailControlle = TextEditingController(text: "muxtorovinomjon0227@gmail.com");
+  final _emailControlle = TextEditingController(text: "");
   final _emailFocusNode = FocusNode();
-  final _fullNameControlle = TextEditingController(text: "Muxtorov Inomjon");
+  final _fullNameControlle = TextEditingController(text: "");
   final _fullNameFocusNode = FocusNode();
 
 
@@ -79,18 +79,18 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
         child: Column(
           children: [
             SizedBox(height: context.h * 0.06),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Switch.adaptive(
-                  value:  isDarkMode,
-                  activeColor: ColorConst.appGreenColor,
-                  onChanged: (value) {
-                    isDarkMode = value;
-                    widget.controller.inputTheme.add(value);
-                  },
-                ),
-              ],),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Switch.adaptive(
+            //       value:  isDarkMode,
+            //       activeColor: ColorConst.appGreenColor,
+            //       onChanged: (value) {
+            //         isDarkMode = value;
+            //         widget.controller.inputTheme.add(value);
+            //       },
+            //     ),
+            //   ],),
             SizedBox(height: context.h * 0.1),
             BigText(
               text: "Sign Up",
