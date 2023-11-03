@@ -65,7 +65,7 @@ class BodyState extends State<BodyLayout> {
   }
 
   Widget _getUsersList(BuildContext context) {
-    final users = utils.users;
+    final users = utils.usersForCall;
 
     return ListView.builder(
       itemCount: users.length,
@@ -117,8 +117,7 @@ class BodyState extends State<BodyLayout> {
       _selectedUserId = user.id;
     });
 
-    if (CubeSessionManager.instance.isActiveSessionValid() &&
-        CubeSessionManager.instance.activeSession!.user != null) {
+    if (CubeSessionManager.instance.isActiveSessionValid() && CubeSessionManager.instance.activeSession!.user != null) {
       if (CubeChatConnection.instance.isAuthenticated()) {
         setState(() {
           _isLoginContinues = false;

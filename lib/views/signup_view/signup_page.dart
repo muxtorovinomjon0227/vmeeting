@@ -6,11 +6,8 @@ import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/src/extension/context_extensions.dart';
 import 'package:vmeeting/src/utils/app_utils.dart';
 import 'package:vmeeting/src/widgets/small_text.dart';
-
-import '../../app_models/user_model/user_model.dart';
 import '../../service/routes/routes_name.dart';
 import '../../src/constants/colors_const.dart';
-import '../../src/utils/show_dialogs.dart';
 import '../../src/widgets/big_text_widget.dart';
 import '../../src/widgets/custom_loading/customloading.dart';
 import '../../src/widgets/exceptions/app_exeptions.dart';

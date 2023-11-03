@@ -7,6 +7,7 @@ import 'package:vmeeting/service/routes/routes_name.dart';
 import 'package:vmeeting/views/main_view/main_page.dart';
 import '../../blocs/user_login_bloc/user_log_in_bloc.dart';
 import '../../src/controllers/enter_number_cont.dart';
+import '../../src/login_screen.dart';
 import '../../views/signin_view/signin_page.dart';
 import '../../views/signup_view/signup_page.dart';
 import '../../views/splash_view/splash_screen.dart';
@@ -36,6 +37,9 @@ class MainNavigator extends StatelessWidget {
           switch (settings.name) {
             case MainRoutes.splash_screen:
               builder = (BuildContext _) => SplashScreen(controller: controller);
+              break;
+              case MainRoutes.old_sign_in:
+              builder = (BuildContext _) => LoginScreen();
               break;
               case MainRoutes.main_page:
               builder = (BuildContext _) => MainPage(controller: controller);

@@ -1,10 +1,10 @@
 class AppUsersModel {
-  User? user;
+  UserModel? user;
 
   AppUsersModel({this.user});
 
   AppUsersModel.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -16,7 +16,7 @@ class AppUsersModel {
   }
 }
 
-class User {
+class UserModel {
   String? sId;
   int? id;
   String? createdAt;
@@ -37,7 +37,7 @@ class User {
   String? externalId;
   String? isGuest;
 
-  User(
+  UserModel(
       {this.sId,
         this.id,
         this.createdAt,
@@ -58,7 +58,7 @@ class User {
         this.externalId,
         this.isGuest});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     id = json['id'];
     createdAt = json['created_at'];

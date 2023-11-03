@@ -39,7 +39,7 @@ void errorMessage(BuildContext context) async {
                         ),
                       ],
                     ),
-                     SmallText(text: "There is something wrong with you try again",
+                     SmallText(text: "Something went wrong during login to ConnectyCube",
                        fontWidget: FontWeight.bold,
                        size: context.h*0.02,
                        textAlign: TextAlign.center,),

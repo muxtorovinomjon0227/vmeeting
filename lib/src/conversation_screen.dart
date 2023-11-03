@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:universal_io/io.dart';
+import 'package:vmeeting/service/routes/routes_name.dart';
 import 'package:vmeeting/src/utils/configs.dart';
 import 'package:web_browser_detect/web_browser_detect.dart';
 
@@ -162,12 +163,7 @@ class _ConversationCallScreenState extends State<ConversationCallScreen>
 
     _statsReportsManager.dispose();
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      ),
-    );
+   Navigator.pushReplacementNamed(context, MainRoutes.main_page);
   }
 
   Widget buildMinorVideoItem(int opponentId, RTCVideoRenderer renderer) {
@@ -527,7 +523,7 @@ class _ConversationCallScreenState extends State<ConversationCallScreen>
                                       CubeChatConnection
                                           .instance.currentUser?.id
                                   ? 'Me'
-                                  : users
+                                  : usersForCall
                                           .where((user) => user.id == entry.key)
                                           .first
                                           .fullName ??

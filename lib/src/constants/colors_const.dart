@@ -12,6 +12,9 @@ class ColorConst {
   static Color appMainColorBak = Color(0xFF35353f);
   static Color appGreanColor = Color(0xFFb2b7ce);
   static Color appRedColor = Color(0xFFff0000);
+  static const Color iconColor = Color(0xff130F26);
+
+  static BorderRadius defaultBorderRadius = BorderRadius.all(Radius.circular(20));
 
 
 

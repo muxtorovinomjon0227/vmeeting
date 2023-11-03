@@ -154,8 +154,7 @@ class _BodyLayoutState extends State<BodyLayout> {
 
   Widget _getOpponentsList(BuildContext context) {
     CubeUser? currentUser = CubeChatConnection.instance.currentUser;
-    final users =
-        utils.users.where((user) => user.id != currentUser!.id).toList();
+    final users = utils.usersForCall.where((user) => user.id != currentUser!.id).toList();
 
     return ListView.builder(
       itemCount: users.length,

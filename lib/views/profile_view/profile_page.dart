@@ -24,9 +24,8 @@ class ProfilePage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: context.h * 0.1),
-            buildImage(context),
-            SizedBox(height: context.h * 0.1),
+            buildImage(context,AppUtils.userModel.avatar),
+            SizedBox(height: context.h * 0.06),
             buildDetails(context),
           ],
         ),
@@ -101,10 +100,11 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget buildImage(BuildContext context) {
+  Widget buildImage(BuildContext context, String? imagaAvatar) {
     return Center(
-      child: AvatarImage(
-          radius: context.h * 0.1, imagePath: 'assets/contact_avatar.png'),
-    );
+        child: AvatarImage(
+          radius: context.h * 0.09,
+          imagePath: imagaAvatar,
+        ));
   }
 }

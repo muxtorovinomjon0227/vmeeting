@@ -27,7 +27,7 @@ class _UserSignInPageState extends State<UserSignInPage> {
   late bool isDarkMode = false;
   final _loginControlle = TextEditingController(text: "Inomjon2000");
   final _loginFocusNode = FocusNode();
-  final _passwordControlle = TextEditingController(text: "Inomjon5408");
+  final _passwordControlle = TextEditingController(text: "Flutter2000");
   final _passwordFocusNode = FocusNode();
 
   @override
@@ -166,7 +166,8 @@ class _UserSignInPageState extends State<UserSignInPage> {
   Future<void> userSigIn() async {
     CubeUser user = CubeUser(
       login: _loginControlle.text,
-      password: _passwordControlle.text,);
+      password: _passwordControlle.text,
+    );
     userLogInBloc.add(UserLogInChakingEvent(controller: widget.controller, context: context, user: user));
 
   }

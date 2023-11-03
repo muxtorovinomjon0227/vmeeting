@@ -127,6 +127,8 @@ class CallManager {
 
   void startNewCall(
       BuildContext context, int callType, Set<int> opponents) async {
+    _callClient = P2PClient.instance;
+    _callClient!.init();
     if (opponents.isEmpty) return;
 
     Helper.setAppleAudioIOMode(AppleAudioIOMode.localAndRemote);
@@ -204,7 +206,7 @@ class CallManager {
   }
 
   CreateEventParams _getCallEventParameters(P2PSession currentCall) {
-    String? callerName = users
+    String? callerName = usersForCall
         .where((cubeUser) => cubeUser.id == currentCall.callerId)
         .first
         .fullName;

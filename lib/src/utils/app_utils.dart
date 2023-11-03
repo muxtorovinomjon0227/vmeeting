@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmeeting/src/constants/colors_const.dart';
-
-import '../../app_models/user_model/user_model.dart';
+import '../../app_models/app_users_model/app_users_model.dart';
 
 class AppUtils {
   static  Widget buttonLoader = SizedBox(

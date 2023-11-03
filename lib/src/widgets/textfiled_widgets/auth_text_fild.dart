@@ -21,7 +21,7 @@ class AuthTextFild extends StatelessWidget {
         this.borderRadius = 16,
         this.icon,
         this.suffixIcon,
-        this.elevation = 10,
+        this.elevation = 0,
         this.color = Colors.white,
         this.type,
         this.obscureText = false,
@@ -41,7 +41,6 @@ class AuthTextFild extends StatelessWidget {
       Material(
         elevation: elevation,
         borderRadius: BorderRadius.circular(borderRadius),
-        shadowColor: const Color(0xffffffff),
         child: Container(
           padding: const EdgeInsets.only(),
           decoration: const BoxDecoration(
@@ -86,17 +85,12 @@ class AuthTextFild extends StatelessWidget {
                       fontStyle: FontStyle.normal,
                       color: Colors.grey,
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(borderRadius),
-                      ),
-                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(borderRadius),
                     ),
                   ),
