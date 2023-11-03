@@ -9,7 +9,6 @@ import 'package:upgrader/upgrader.dart';
 import 'package:vmeeting/service/routes/app_routes.dart';
 import 'package:vmeeting/service/routes/navigator_service.dart';
 import 'package:vmeeting/src/constants/app_themes/app_themes.dart';
-import 'package:vmeeting/src/constants/colors_const.dart';
 import 'package:vmeeting/src/controllers/enter_number_cont.dart';
 import 'package:vmeeting/src/utils/pref_util.dart';
 import 'firebase_options.dart';
@@ -44,7 +43,7 @@ class _AppState extends State<App> {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: getAppTheme(context, snapshot.data ?? false),
-              title: 'Theme App',
+              title: 'MyMeeting',
               navigatorKey: App.navigationService.navigatorKey,
               home: UpgradeAlert(
                 upgrader: Upgrader(
@@ -68,7 +67,7 @@ class _AppState extends State<App> {
           textTheme: GoogleFonts.latoTextTheme(),
           primarySwatch: Colors.green,
         ),
-        title: 'Theme App',
+        title: 'MyMeeting',
         navigatorKey: App.navigationService.navigatorKey,
         home: MainNavigator(controller: controller),
     );
