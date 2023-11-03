@@ -25,9 +25,9 @@ class UserSignInPage extends StatefulWidget {
 class _UserSignInPageState extends State<UserSignInPage> {
   late UserLogInBloc userLogInBloc;
   late bool isDarkMode = false;
-  final _loginControlle = TextEditingController(text: "Inomjon2000");
+  final _loginControlle = TextEditingController(text: "");
   final _loginFocusNode = FocusNode();
-  final _passwordControlle = TextEditingController(text: "Flutter2000");
+  final _passwordControlle = TextEditingController(text: "");
   final _passwordFocusNode = FocusNode();
 
   @override
