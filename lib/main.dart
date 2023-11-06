@@ -62,14 +62,14 @@ class _AppState extends State<App> {
           );
         })
         : MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: GoogleFonts.latoTextTheme(),
-          primarySwatch: Colors.green,
-        ),
-        title: 'MyMeeting',
-        navigatorKey: App.navigationService.navigatorKey,
-        home: MainNavigator(controller: controller),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(),
+        primarySwatch: Colors.green,
+      ),
+      title: 'MyMeeting',
+      navigatorKey: App.navigationService.navigatorKey,
+      home: MainNavigator(controller: controller),
     );
 
   }
